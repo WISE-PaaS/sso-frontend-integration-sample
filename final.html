@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>SSO Integration Guide</title>
+</head>
+
+<body>
+    <script>
+        var ssoUri = 'https://portal-sso.wise-paas.com';
+        var redirectUriAfterLogin = 'https://{appName}.wise-paas.com/index.html';
+        var redirectUriAfterLogout = 'https://{appName}.wise-paas.com/index.html';
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- The syntax on page fifth to seventh is added after this line. -->
+    <button type="button" id="signInBtn">Sign in</button>
+    <script>
+        $('#signInBtn').click(function () {
+            window.location.href = ssoUri + '/web/signIn.html?redirectUri=' + redirectUriAfterLogin;
+        });
+    </script>
+
+    <button type="button" id="signOutBtn">Sign out</button>
+    <script>
+        $('#signOutBtn').click(function () {
+            window.location.href = ssoUri + '/web/signOut.html?redirectUri=' + redirectUriAfterLogout;
+        });
+    </script>
+
+    <button type="button" id="checkLogin">Check Login Status</button>
+    <script>
+        $('#checkLogin').click(function () {
+            $.ajax({
+                url: ssoUri + '/v2.0/users/me',
+                method: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                }
+            }).done(function (user) {
+                alert('Hello! ' + user.lastName + ' ' + user.firstName);
+            }).fail(function () {
+                alert('You are not logged in!');
+            });
+        });
+    </script>
+</body>
+
+</html>
