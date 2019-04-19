@@ -1,6 +1,6 @@
 ---
 applications:   
-- name: sso-frontend-demo-1.0.0
+- name: sso-frontend-{firstname}-{lastname}-demo
   memory: 32M
   disk_quota: 128M
   instances: 1
